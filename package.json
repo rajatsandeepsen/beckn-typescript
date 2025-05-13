@@ -1,0 +1,23 @@
+{
+  "name": "beckn-typescript",
+  "module": "index.ts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "openapi-all": "npm run openapi-transaction && npm run openapi-registry && npm run openapi-meta",
+    "openapi-transaction": "openapi-typescript ./protocol-specifications/api/transaction/components/index.yaml -o ./api/transaction.d.ts",
+    "openapi-registry": "openapi-typescript ./protocol-specifications/api/registry/components/index.yaml -o ./api/registry.d.ts",
+    "openapi-meta": "openapi-typescript ./protocol-specifications/api/meta/components/index.yaml -o ./api/meta.d.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "openapi-fetch": "^0.14.0",
+    "openapi-typescript": "^7.8.0"
+  }
+}
