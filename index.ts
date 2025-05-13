@@ -1,5 +1,5 @@
 import createClient from "openapi-fetch";
-import type { metaPath, registryPath, transactionPath } from "./type";
+import type { metaPath, registryPath, transactionPath } from "./type.d.ts";
 
 export const fetchMeta = createClient<metaPath>().POST
 export const fetchRegistry = createClient<registryPath>().POST
