@@ -125,3 +125,4 @@ function MyComponent() {
 # References
 - [Beckn Protocol Specifications](https://github.com/beckn/protocol-specifications.git)
 - [OpenAPI Typescript Client](https://openapi-ts.dev/)
+- [NPM Package](https://www.npmjs.com/package/beckn-typescript)

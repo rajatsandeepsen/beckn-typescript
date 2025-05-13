@@ -1,9 +1,19 @@
 {
   "name": "beckn-typescript",
+  "description": "Beckn Protocol Client for Typescript",
   "module": "index.ts",
   "version": "1.0.0",
   "type": "module",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
+    "build": "bun run ./build.ts",
+    "publish": "npm publish",
+    "prepublishOnly": "bun run openapi-all && bun run build",
     "openapi-all": "npm run openapi-transaction && npm run openapi-registry && npm run openapi-meta",
     "openapi-transaction": "openapi-typescript ./protocol-specifications/api/transaction/components/index.yaml -o ./api/transaction.d.ts",
     "openapi-registry": "openapi-typescript ./protocol-specifications/api/registry/components/index.yaml -o ./api/registry.d.ts",
@@ -11,7 +21,8 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/node": "latest"
+    "@types/node": "latest",
+    "bun-plugin-dts": "^0.3.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
