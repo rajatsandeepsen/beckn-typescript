@@ -1,40 +1,51 @@
 {
-  "name": "beckn-typescript",
-  "description": "Beckn Protocol Client for Typescript",
-  "module": "index.ts",
-  "version": "1.0.0",
-  "type": "module",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
-  "scripts": {
-    "build": "bun run ./build.ts",
-    "prepublishOnly": "bun run type-all && bun run build",
-
-    "json-all": "npm run json-transaction && npm run json-registry && npm run json-meta",
-    "json-transaction": "bunx @redocly/cli bundle ./protocol-specifications/api/transaction/components/index.yaml --output ./api/transaction/openapi.json",
-    "json-meta": "bunx @redocly/cli bundle ./protocol-specifications/api/meta/components/index.yaml --output ./api/meta/openapi.json",
-    "json-registry": "bunx @redocly/cli bundle ./protocol-specifications/api/registry/components/index.yaml --output ./api/registry/openapi.json",
-
-    "type-all": "npm run type-transaction && npm run type-registry && npm run type-meta",
-    "type-transaction": "openapi-typescript ./protocol-specifications/api/transaction/components/index.yaml -o ./type/transaction.d.ts",
-    "type-registry": "openapi-typescript ./protocol-specifications/api/registry/components/index.yaml -o ./type/registry.d.ts",
-    "type-meta": "openapi-typescript ./protocol-specifications/api/meta/components/index.yaml -o ./type/meta.d.ts"
-  },
-  "devDependencies": {
-    "@redocly/cli": "^1.34.3",
-    "@types/bun": "latest",
-    "@types/node": "latest",
-    "bun-plugin-dts": "^0.3.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "openapi-fetch": "^0.14.0",
-    "openapi-typescript": "^7.8.0"
-  }
+	"name": "beckn-typescript",
+	"description": "Beckn Protocol Client & Server Tools for Typescript",
+	"repository": {
+		"directory": "/",
+		"url": "https://github.com/rajatsandeepsen/beckn-typescript",
+		"type": "git"
+	},
+	"keywords": ["beckn", "DPI", "India", "FIDE", "protocol", "ONDC"],
+	"module": "index.ts",
+	"version": "2.0.0",
+	"type": "module",
+	"license": "MIT",
+	"files": ["dist/**/*"],
+	"scripts": {
+		"build": "bun run ./build.ts",
+		"prepublishOnly": "bun run type-all && bun run build",
+		"server-all": "npm run server-transaction && npm run server-registry && npm run server-meta",
+		"server-meta": "bunx @openapitools/openapi-generator-cli generate -g nodejs-express-server --package-name meta -o ./server/meta -i ./api/meta/openapi.json",
+		"server-transaction": "bunx @openapitools/openapi-generator-cli generate -g nodejs-express-server --package-name transaction -o ./server/transaction -i ./api/transaction/openapi.json",
+		"server-registry": "bunx @openapitools/openapi-generator-cli generate -g nodejs-express-server --package-name registry -o ./server/registry -i ./api/registry/openapi.json",
+		"json-all": "npm run json-transaction && npm run json-registry && npm run json-meta",
+		"json-transaction": "bunx @redocly/cli bundle ./protocol-specifications/api/transaction/components/index.yaml --output ./api/transaction/openapi.json",
+		"json-meta": "bunx @redocly/cli bundle ./protocol-specifications/api/meta/components/index.yaml --output ./api/meta/openapi.json",
+		"json-registry": "bunx @redocly/cli bundle ./protocol-specifications/api/registry/components/index.yaml --output ./api/registry/openapi.json",
+		"type-all": "npm run type-transaction && npm run type-registry && npm run type-meta",
+		"type-transaction": "openapi-typescript --export-type ./protocol-specifications/api/transaction/components/index.yaml -o ./type/transaction.d.ts",
+		"type-registry": "openapi-typescript --export-type ./protocol-specifications/api/registry/components/index.yaml -o ./type/registry.d.ts",
+		"type-meta": "openapi-typescript --export-type ./protocol-specifications/api/meta/components/index.yaml -o ./type/meta.d.ts"
+	},
+	"devDependencies": {
+		"@openapitools/openapi-generator-cli": "^2.20.2",
+		"@redocly/cli": "^1.34.3",
+		"@types/bun": "latest",
+		"@types/express": "^5.0.2",
+		"@types/next": "^9.0.0",
+		"@types/node": "latest",
+		"bun-plugin-dts": "^0.3.0",
+		"bun-plugin-isolated-decl": "^0.2.6",
+		"openapi-typescript": "^7.8.0",
+		"oxc-transform": "^0.72.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5.8.3"
+	},
+	"dependencies": {
+		"express": "^5.1.0",
+		"hono": "^4.7.10",
+		"openapi-fetch": "^0.14.0"
+	}
 }

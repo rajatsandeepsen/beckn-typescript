@@ -3,7 +3,7 @@
  * Do not make direct changes to the file.
  */
 
-export interface paths {
+export type paths = {
     "/get_cancellation_reasons": {
         parameters: {
             query?: never;
@@ -196,9 +196,9 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-}
+};
 export type webhooks = Record<string, never>;
-export interface components {
+export type components = {
     schemas: {
         /** @description Standard code representing the domain. The standard is usually published as part of the network policy. Furthermore, the network facilitator should also provide a mechanism to provide the supported domains of a network. */
         code: unknown;
@@ -500,6 +500,6 @@ export interface components {
     requestBodies: never;
     headers: never;
     pathItems: never;
-}
+};
 export type $defs = Record<string, never>;
 export type operations = Record<string, never>;
