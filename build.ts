@@ -1,17 +1,19 @@
 import dts from "bun-plugin-dts";
-import isolatedDecl from "bun-plugin-isolated-decl";
 
 await Bun.build({
     entrypoints: ["./client/index.ts"],
     outdir: "./dist/client",
     splitting: true,
     format: "esm",
-    minify: true,
+    minify: false,
     target: "browser",
     packages: "bundle",
     external: ["openapi-fetch"],
     plugins: [
         dts({
+            libraries: {
+                allowedTypesLibraries: ["../type"],
+            },
             output: {
                 // exportReferencedTypes: true,
                 noBanner: true,
@@ -35,13 +37,16 @@ await Bun.build({
     external: ["hono", "express", "next", "openapi-fetch"],
     plugins: [
         dts({
+            compilationOptions: {
+                preferredConfigPath: "./tsconfig.json",
+            },
+            libraries: {
+                allowedTypesLibraries: ["../type"],
+            },
             output: {
-                // exportReferencedTypes: true,
+                exportReferencedTypes: true,
                 noBanner: true,
             },
         }),
-        // isolatedDecl({
-        //     forceGenerate: true,
-        // }),
     ],
 });

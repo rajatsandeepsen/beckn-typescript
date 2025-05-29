@@ -1,5 +1,8 @@
 import createClient from "openapi-fetch";
-import type { metaPath, registryPath, transactionPath } from "../type/";
+
+type metaPath = typeof import("../type/meta");
+type registryPath = typeof import("../type/registry");
+type transactionPath = typeof import("../type/transaction");
 
 /**
  * Fetch metadata from the API.

@@ -8,13 +8,14 @@
 	},
 	"keywords": ["beckn", "DPI", "India", "FIDE", "protocol", "ONDC"],
 	"module": "index.ts",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"type": "module",
 	"license": "MIT",
 	"files": ["dist/**/*"],
 	"scripts": {
+		"generate": "bun run ./generate.ts",
 		"build": "bun run ./build.ts",
-		"prepublishOnly": "bun run type-all && bun run build",
+		"prepublishOnly": "bun run generate && bun run build",
 		"server-all": "npm run server-transaction && npm run server-registry && npm run server-meta",
 		"server-meta": "bunx @openapitools/openapi-generator-cli generate -g nodejs-express-server --package-name meta -o ./server/meta -i ./api/meta/openapi.json",
 		"server-transaction": "bunx @openapitools/openapi-generator-cli generate -g nodejs-express-server --package-name transaction -o ./server/transaction -i ./api/transaction/openapi.json",
@@ -22,11 +23,7 @@
 		"json-all": "npm run json-transaction && npm run json-registry && npm run json-meta",
 		"json-transaction": "bunx @redocly/cli bundle ./protocol-specifications/api/transaction/components/index.yaml --output ./api/transaction/openapi.json",
 		"json-meta": "bunx @redocly/cli bundle ./protocol-specifications/api/meta/components/index.yaml --output ./api/meta/openapi.json",
-		"json-registry": "bunx @redocly/cli bundle ./protocol-specifications/api/registry/components/index.yaml --output ./api/registry/openapi.json",
-		"type-all": "npm run type-transaction && npm run type-registry && npm run type-meta",
-		"type-transaction": "openapi-typescript --export-type ./protocol-specifications/api/transaction/components/index.yaml -o ./type/transaction.d.ts",
-		"type-registry": "openapi-typescript --export-type ./protocol-specifications/api/registry/components/index.yaml -o ./type/registry.d.ts",
-		"type-meta": "openapi-typescript --export-type ./protocol-specifications/api/meta/components/index.yaml -o ./type/meta.d.ts"
+		"json-registry": "bunx @redocly/cli bundle ./protocol-specifications/api/registry/components/index.yaml --output ./api/registry/openapi.json"
 	},
 	"devDependencies": {
 		"@openapitools/openapi-generator-cli": "^2.20.2",

@@ -1,11 +1,3 @@
-export type { paths as metaPath } from "./meta";
-export type { paths as transactionPath } from "./transaction";
-export type { paths as registryPath } from "./registry";
-
-export type { components as metaComponents } from "./meta";
-export type { components as transactionComponents } from "./transaction";
-export type { components as registryComponents } from "./registry";
-
 export type ExcludeOnKeys<OB extends Record<string, any>> = {
     [K in keyof OB as K extends `on_${string}` ? never : K]: OB[K];
 };
